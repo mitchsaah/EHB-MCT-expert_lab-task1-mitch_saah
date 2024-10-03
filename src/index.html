@@ -4,11 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./src/style.css">
+    <link rel="stylesheet" href="style.css">
     <title>Chatroulette</title>
 </head>
 
 <body>
+    <h1>Welcome to Chatroulette</h1>
+    <!-- Video elements for the local and remote video streams -->
+    <video id="localVideo" autoplay playsinline muted></video>
+    <video id="remoteVideo" autoplay playsinline></video>
+
+    <!-- Includes the Socket.IO library for the client-side -->
+    <script src="/socket.io/socket.io.js"></script>
+    
+    <!-- Runs main.js  -->
+    <script src="main.js"></script>
 
 </body>
 
