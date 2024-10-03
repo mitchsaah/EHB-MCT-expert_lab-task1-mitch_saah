@@ -16,7 +16,7 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 // 4 - This serves static files from the 'src' folder
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, 'src')));
 
 // 5 - Websocket connection
 io.on('connection', (socket) => {
