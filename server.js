@@ -7,6 +7,8 @@ const express = require('express');
 const http = require('http');         
 const { Server } = require('socket.io');
 const path = require('path');  // Used to serve static files with correct paths
+const connectToMongoDB = require('./db/mongoDb-connect'); // Connection to mongoDB
+const authRoutes = require('./routes/authRoutes');
 
 // 2 - Creates an HTTP server + Express
 const app = express();
@@ -16,7 +18,11 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 // 4 - This serves static files from the 'src' folder
+app.use(express.json()); 
 app.use(express.static(path.join(__dirname, 'src')));
+
+// Routes
+app.use('/auth', authRoutes);
 
 // 5 - Websocket connection
 io.on('connection', (socket) => {
@@ -44,17 +50,10 @@ io.on('connection', (socket) => {
     });
 });
 
+connectToMongoDB(); //Connects to db
+
 // Starts the server on port 3010
 const PORT = 3010;
 server.listen(PORT, () => {
     console.log(`The server is running on http://localhost:3010 `);
 });
-
-/////////////////////////////////////////////////////////////////////
-/////////////////// Database setup //////////////////////////////////
-/////////////////////////////////////////////////////////////////////
-
-// 1 - Connection to mongoDB
-const connectToMongoDB = require('./db/mongoDb-connect');
-
-connectToMongoDB();
