@@ -1,8 +1,8 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const User = require('../models/UserModel');
+const User = require('../models/userModel');
 const router = express.Router();
-const saltRounds = 10;  // For the hashing of the pw
+const saltRounds = 10;
 
 // Adds a user 
 router.post('/register', async (req, res) => {

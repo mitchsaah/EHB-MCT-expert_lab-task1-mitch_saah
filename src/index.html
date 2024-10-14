@@ -10,9 +10,25 @@
 
 <body>
     <h1>Welcome to Chatroulette</h1>
-    <!-- Video elements for the local and remote video streams -->
-    <video id="localVideo" autoplay playsinline muted></video>
-    <video id="remoteVideo" autoplay playsinline></video>
+    <!-- Registration -->
+    <div id="registerSection">
+        <h2>Create an Account</h2>
+        <form id="registerForm">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Register</button>
+        </form>
+        <p id="registerMessage"></p> <!-- Voor feedback -->
+        <p>Already have an account? <a href="#" id="showLoginLink">Log in</a></p> <!-- Nieuw: Log in link -->
+    </div>
+
+    <!-- Video sectie voor WebRTC -->
+    <div id="videoSection" style="display: none;">
+        <h2>Video Chat</h2>
+        <video id="localVideo" autoplay playsinline muted></video>
+        <video id="remoteVideo" autoplay playsinline></video>
+        <button id="connectButton" style="display: none;">Connect</button> <!-- Verbindingsknop -->
+    </div>
 
     <!-- Includes the Socket.IO library for the client-side -->
     <script src="/socket.io/socket.io.js"></script>
