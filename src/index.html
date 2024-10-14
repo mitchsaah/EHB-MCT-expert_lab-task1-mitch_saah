@@ -22,6 +22,18 @@
         <p>Already have an account? <a href="#" id="showLoginLink">Log in</a></p> <!-- Nieuw: Log in link -->
     </div>
 
+    <!-- Login -->
+    <div id="loginSection" style="display: none;">
+        <h2>Log In</h2>
+        <form id="loginForm">
+            <input type="text" id="loginUsername" placeholder="Username" required>
+            <input type="password" id="loginPassword" placeholder="Password" required>
+            <button type="submit">Log In</button>
+        </form>
+        <p id="loginMessage"></p> <!-- Voor feedback -->
+        <p>Don't have an account? <a href="#" id="showRegisterLink">Register</a></p> <!-- Link terug naar registratie -->
+    </div>
+
     <!-- Video sectie voor WebRTC -->
     <div id="videoSection" style="display: none;">
         <h2>Video Chat</h2>

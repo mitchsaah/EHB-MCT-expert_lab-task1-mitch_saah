@@ -31,55 +31,29 @@ router.post('/register', async (req, res) => {
     }
 });
 
-module.exports = router;
-
-// Updates user
-router.put('/update', async (req, res) => {
-    const { username, newUsername, newPassword } = req.body;
+// Login route
+router.post('/login', async (req, res) => {
+    const { username, password } = req.body;
 
     try {
-        // Checks if user exists
         const user = await User.findOne({ username });
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        // Updates the username
-        if (newUsername) {
-            const existingUser = await User.findOne({ username: newUsername });
-            if (existingUser) {
-                return res.status(400).json({ message: 'This new username has been taken already' });
-            }
-            user.username = newUsername;
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).json({ message: 'Invalid password' });
         }
 
-        // Updates the pw
-        if (newPassword) {
-            const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
-            user.password = hashedPassword;
-        }
+        // Optional: If you want to return a JWT for authentication
+        // const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        // res.json({ message: 'Login successful', token });
 
-        // Saves made changes
-        await user.save();
-        res.status(200).json({ message: 'The user has been updated' });
-    } catch (err) {
-        res.status(500).json({ message: 'Oops, there was an error when the updating user', error: err });
+        res.status(200).json({ message: 'Login successful' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error during login', error });
     }
 });
 
-// Deletes user 
-router.delete('/delete', async (req, res) => {
-    const { username } = req.body;
-
-    try {
-        // Searches and deletes user
-        const user = await User.findOneAndDelete({ username });
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-
-        res.status(200).json({ message: 'The user has been deleted' });
-    } catch (err) {
-        res.status(500).json({ message: 'Oops, there was an error when deleting this user', error: err });
-    }
-});
+module.exports = router;

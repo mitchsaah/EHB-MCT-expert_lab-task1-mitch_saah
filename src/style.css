@@ -50,6 +50,44 @@ h1 {
     background-color: #0056b3;
 }
 
+/* Login sectie*/
+#loginSection {
+    margin-top: 50px;
+}
+
+#loginForm {
+    display: inline-block;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#loginForm input {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    width: 80%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#loginForm button {
+    padding: 10px 20px;
+    background-color: #28a745; /* Andere kleur voor login button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#loginForm button:hover {
+    background-color: #218838;
+}
+
+#loginMessage {
+    color: rgb(150, 149, 149);
+}
 /* Video sectie */
 #videoSection {
     margin-top: 30px;
